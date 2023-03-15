@@ -64,17 +64,6 @@ def get_shop(request):
     }
     return Response(data)
 
-@api_view(["POST"])
-def add_product(request):
-    form = ShopForm(request.POST, request.FILES)
-    if form.is_valid():
-        form.save()
-    product_ser = ShopSerializer(Shop.objects.last())
-    data = {
-        "data": product_ser.data
-    }
-    return Response(data)
-
 @api_view(["GET"])
 def get_statistics(request):
     matches = Match.objects.all().order_by("-id")
